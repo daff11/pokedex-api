@@ -2,7 +2,7 @@
 
 ## Project Overview
 Simple Pokedex backend API that fetches Pokémon data from PokeAPI, stores it in PostgreSQL, and caches with Redis.  
-Frontend is optional.
+Provided with simple frontend in file named index.html
 
 ---
 
