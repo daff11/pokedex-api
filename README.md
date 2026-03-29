@@ -20,20 +20,23 @@ npm install
 ```
 
 3. **Create .env file in project root**
+```   
 PORT=3000
 DB_NAME=pokedex
 DB_USER=postgres
 DB_PASS=1234
 DB_HOST=localhost
 REDIS_URL=redis://localhost:6379
+```
 
-4. **Ensure PostgreSQL is running**
+5. **Ensure PostgreSQL is running**
 - Database name: pokedex
-- Table pokemon exists (or let Sequelize auto-create)
+- Create Table with name pokemon (For easier use, you can use built-in SQL query in file named query postgres.sql)
 
 5. **Ensure Redis is running**
 - Default port: 6379
-- Test: redis-cli ping → should return PONG (can try on your terminal or CMD)
+- Start the redis server using WSL or docker or relevant apps
+- Make sure to Test: redis-cli ping → should return PONG (can try on your terminal or CMD)
 
 6. **Run Server**
 ```bash
