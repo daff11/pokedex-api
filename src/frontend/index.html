@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pokedex</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f0f0f0; }
+        h1 { color: #ff0000; }
+        .pokemon { border: 1px solid #ccc; padding: 10px; margin: 10px 0; background: #fff; display: flex; align-items: center; }
+        .pokemon img { width: 80px; height: 80px; margin-right: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Pokedex</h1>
+    <input type="number" id="pokeId" placeholder="Enter Pokemon ID">
+    <button onclick="getPokemonById()">Get Pokemon</button>
+    <button onclick="getAllPokemon()">Get All Pokemons</button>
+
+    <div id="results"></div>
+
+    <script>
+        const API_URL = 'http://localhost:3000/pokemon';
+
+        async function getAllPokemon() {
+            const res = await fetch(API_URL);
+            const data = await res.json();
+            displayResults(Array.isArray(data) ? data : [data]);
+        }
+
+        async function getPokemonById() {
+            const id = document.getElementById('pokeId').value;
+            if (!id) return alert('Enter an ID!');
+            const res = await fetch(`${API_URL}/${id}`);
+            const data = await res.json();
+            displayResults([data]);
+        }
+
+        function displayResults(pokemons) {
+            const container = document.getElementById('results');
+            container.innerHTML = '';
+            pokemons.forEach(p => {
+                if (!p) return;
+                const div = document.createElement('div');
+                div.className = 'pokemon';
+                div.innerHTML = `
+                    <img src="http://localhost:3000/uploads/${p.image}" alt="${p.name}">
+                    <div>
+                        <strong>${p.name}</strong><br>
+                        Height: ${p.height}<br>
+                        Weight: ${p.weight}<br>
+                        Base Exp: ${p.base_experience}
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+    </script>
+</body>
+</html>
